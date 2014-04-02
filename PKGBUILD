@@ -1,9 +1,9 @@
 # Original PKGBUILD by Taylor Venable <taylor@metasyntax.net>
 
 pkgname=piqi-git
-pkgver=20131206
+pkgver=20140401
 pkgrel=1
-pkgdesc='A set of languages and open-source tools for working with structured data.'
+pkgdesc='Universal schema language for JSON, XML, Protocol Buffers'
 arch=('i686' 'x86_64')
 url='http://piqi.org/'
 license=('Apache')
@@ -32,18 +32,14 @@ build() {
 
   make deps
   make
-  make -C doc
+  make doc
 }
 
-_mandir=/usr/share/man/man1/
 _docdir=/usr/share/doc/piqi/
 
 package() {
   cd $_gitname
   make install DESTDIR="$pkgdir"
-  install -d $pkgdir/$_mandir
-  install -m 644 -t $pkgdir/$_mandir \
-        doc/piqi.1
   install -d $pkgdir/$_docdir
   install -m 644 -t $pkgdir/$_docdir \
         doc/*.html
